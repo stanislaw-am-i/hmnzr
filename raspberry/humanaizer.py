@@ -30,7 +30,7 @@ def process_command(line):
             track_info = tracks[number]
             if not track_info["channel"].get_busy():  
                 sound = pygame.mixer.Sound(track_info["track"])
-                track_info["channel"].play(sound, loops=-1)
+                track_info["channel"].play(sound)
                 track_info["is_playing"] = True
         elif command == "OFF" and number in tracks:
             track_info = tracks[number]
@@ -51,7 +51,7 @@ def do_call():
             str(data.get("Deaths today", 'N/A')),
             str(data.get("People who died of hunger today", 'N/A')),
             str(data.get("Undernourished people in the world", 'N/A')),
-            str(data.get("People with no access to a safe drinking water source", 'N/A')),
+            str(data.get("Deaths of mothers during birth today", 'N/A')),
             str(data.get("Deaths caused by water related diseases today", 'N/A')),
             str(data.get("Suicides today", 'N/A'))
         ])
