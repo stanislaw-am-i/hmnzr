@@ -3,7 +3,7 @@ import time
 import threading
 import requests
 import pygame
-from config import AUDIO_TRACKS, SERIAL_PORT, DATA_URL
+from config import AUDIO_TRACKS, SERIAL_PORT, DATA_URL, PIN_TO_PLAY_LOOP
 
 pygame.mixer.init()
 
@@ -30,7 +30,10 @@ def process_command(line):
             track_info = tracks[number]
             if not track_info["channel"].get_busy():  
                 sound = pygame.mixer.Sound(track_info["track"])
-                track_info["channel"].play(sound)
+                if line in PIN_TO_PLAY_LOOP:
+                    track_info["channel"].play(sound, loops=-1)
+                else:
+                    track_info["channel"].play(sound)
                 track_info["is_playing"] = True
         elif command == "OFF" and number in tracks:
             track_info = tracks[number]

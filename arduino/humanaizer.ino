@@ -19,7 +19,7 @@ String metricNames[7] = {
   "World Population", "Deaths Today", "People died of hunger today", "Undernourished people",
   "People with no access to water", "Deaths by water diseases today", "Suicides today"
 };
-int metricDataState[7] = {0, 0, 0, 0, 0, 0, 0};
+long metricDataState[7] = {0, 0, 0, 0, 0, 0, 0};
 std::set<int> metricsWitnNoConstAudio;
 
 void setup() {
@@ -98,7 +98,7 @@ void loop() {
       displays[i].print(metricData[i]);
       
       if (metricsWitnNoConstAudio.find(i) != metricsWitnNoConstAudio.end()) {
-        int currentMetricValue = metricData[i].toInt();
+        long currentMetricValue = (long) metricData[i].toInt();
         if (currentMetricValue > metricDataState[i]) {
           Serial.print("ON ");
           Serial.println(i + 1); 
